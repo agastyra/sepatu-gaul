@@ -1,21 +1,9 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
+import useCart from "../../hooks/cart.hooks";
 import Table from "../Elements/Table";
-import { useEffect } from "react";
 
 const Cart = ({ productSelected }) => {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    handleAddToCart();
-  }, [productSelected]);
-
-  const handleAddToCart = () => {
-    if (!productSelected.id) {
-      console.log("oke");
-    } else {
-      setProducts((items) => [...items, productSelected]);
-    }
-  };
+  const { cart, total } = useCart(productSelected);
 
   return (
     <>
@@ -28,22 +16,46 @@ const Cart = ({ productSelected }) => {
           <th>Subtotal</th>
         </Table.Head>
         <Table.Body>
-          {products.length < 1 && (
+          {cart.length < 1 && (
             <tr>
               <td colSpan={4}>Cart is empty.</td>
             </tr>
           )}
-          {products.map((product) => {
+          {cart.map(({ id, title, price, qty }) => {
             return (
-              <tr key={product.id}>
-                <td>{product.title}</td>
-                <td>{product.price}</td>
-                <td>2</td>
-                <td>Rp. 2.000.000</td>
+              <tr key={id}>
+                <td>{title}</td>
+                <td>
+                  {price.toLocaleString("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    minimumFractionDigits: 0,
+                  })}
+                </td>
+                <td>{qty}</td>
+                <td>
+                  {(price * qty).toLocaleString("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    minimumFractionDigits: 0,
+                  })}
+                </td>
               </tr>
             );
           })}
         </Table.Body>
+        <Table.Foot>
+          <th colSpan={3} className="text-right">
+            Total
+          </th>
+          <th>
+            {total.toLocaleString("id-ID", {
+              style: "currency",
+              currency: "IDR",
+              minimumFractionDigits: 0,
+            })}
+          </th>
+        </Table.Foot>
       </Table>
     </>
   );

@@ -1,7 +1,6 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useState, useRef, useEffect } from "react";
 import Button from "../Elements/Button";
-import { useRef } from "react";
-import { useEffect } from "react";
 
 const Card = ({ children }) => {
   return (
@@ -42,21 +41,14 @@ const Footer = ({ children, handleAddToCart, productId: id }) => {
     }
   }, [qty]);
 
-  const decreaseQty = () => {
-    setQty((qty) => qty - 1);
-  };
-  const increaseQty = () => {
-    setQty((qty) => qty + 1);
-  };
-
   return (
     <footer className="px-3 flex flex-col justify-between gap-5">
       <section className="flex justify-between items-center">
         <h5 className="text-lg font-medium tracking-wide">{children}</h5>
         <section className="qty flex justify-between items-center gap-4">
           <Button
-            className="bg-slate-300 text-black px-2"
-            onClick={decreaseQty}
+            className="bg-slate-300 text-black px-1"
+            onClick={() => setQty((qty) => qty - 1)}
             ref={decreaseBtn}
           >
             <svg
@@ -72,8 +64,8 @@ const Footer = ({ children, handleAddToCart, productId: id }) => {
           </Button>
           <p className="text-lg">{qty}</p>
           <Button
-            className="bg-slate-600 text-white px-2"
-            onClick={increaseQty}
+            className="bg-slate-600 text-white px-1"
+            onClick={() => setQty((qty) => qty + 1)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +86,10 @@ const Footer = ({ children, handleAddToCart, productId: id }) => {
       </section>
       <Button
         className="bg-blue-600 text-white w-full flex items-center justify-center gap-5"
-        onClick={() => handleAddToCart(id)}
+        onClick={() => {
+          handleAddToCart({ id, qty });
+          setQty(1);
+        }}
       >
         <p>Add to cart</p>
         <svg

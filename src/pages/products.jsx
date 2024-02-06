@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Button from "../components/Elements/Button";
 import Card from "../components/Fragments/Card";
 import ProductLayouts from "../components/Layouts/ProductLayouts";
@@ -12,12 +12,12 @@ const handleLogout = () => {
 };
 
 const ProductsPage = () => {
-  const handleAddToCart = (id) => {
-    const product = products.find((item) => item.id === id);
-    setProduct(product);
-  };
-
   const [product, setProduct] = useState({});
+
+  const handleAddToCart = ({ id, qty }) => {
+    const product = products.find((item) => item.id === id);
+    setProduct({ ...product, qty });
+  };
 
   if (!email) {
     location.href = "/login";
@@ -31,16 +31,17 @@ const ProductsPage = () => {
         </Button>
       </div>
       <ProductLayouts productSelected={product}>
-        {products.map((product) => {
+        {products.map(({ id, title, image, description, price }) => {
           return (
-            <Card key={product.id}>
-              <Card.Header img={product.image}>{product.title}</Card.Header>
-              <Card.Body>{product.description}</Card.Body>
-              <Card.Footer
-                productId={product.id}
-                handleAddToCart={handleAddToCart}
-              >
-                {product.price}
+            <Card key={id}>
+              <Card.Header img={image}>{title}</Card.Header>
+              <Card.Body>{description}</Card.Body>
+              <Card.Footer productId={id} handleAddToCart={handleAddToCart}>
+                {price.toLocaleString("id-ID", {
+                  style: "currency",
+                  currency: "IDR",
+                  minimumFractionDigits: 0,
+                })}
               </Card.Footer>
             </Card>
           );

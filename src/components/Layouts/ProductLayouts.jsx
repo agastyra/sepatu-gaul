@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Cart from "../Fragments/Cart";
 
 const ProductLayouts = (props) => {

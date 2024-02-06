@@ -4,41 +4,41 @@
     "title": "Brand new Shoes",
     "image": "/images/shoes-1.jpg",
     "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos saepe quibusdam",
-    "price": "Rp. 500.000"
+    "price": 500000
   },
   {
     "id": 2,
     "title": "Greatest Shoes",
     "image": "/images/shoes-2.jpg",
     "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos saepe quibusdam",
-    "price": "Rp. 1.500.000"
+    "price": 1500000
   },
   {
     "id": 3,
     "title": "Awesome shoes",
     "image": "/images/shoes-3.jpg",
     "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos saepe quibusdam",
-    "price": "Rp. 770.000"
+    "price": 770000
   },
   {
     "id": 4,
     "title": "Beautiful Shoes",
     "image": "/images/shoes-4.jpg",
     "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos saepe quibusdam",
-    "price": "Rp. 1.200.000"
+    "price": 1200000
   },
   {
     "id": 5,
     "title": "Handsome Shoes",
     "image": "/images/shoes-5.jpg",
     "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos saepe quibusdam",
-    "price": "Rp. 1.200.000"
+    "price": 1200000
   },
   {
     "id": 6,
     "title": "Vintage Shoes",
     "image": "/images/shoes-6.jpg",
     "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos saepe quibusdam",
-    "price": "Rp. 2.500.000"
+    "price": 2500000
   }
 ]
