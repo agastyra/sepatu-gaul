@@ -1,9 +1,20 @@
 /* eslint-disable react/prop-types */
-import useCart from "../../hooks/cart.hooks";
+import { useState, useEffect } from "react";
 import Table from "../Elements/Table";
+import { useSelector } from "react-redux";
 
-const Cart = ({ productSelected }) => {
-  const { cart, total } = useCart(productSelected);
+const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const sum = cart.reduce(
+      (total, product) => total + product.qty * product.price,
+      0
+    );
+    setTotal(sum);
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   return (
     <>

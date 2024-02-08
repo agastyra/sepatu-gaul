@@ -1,22 +1,17 @@
 import useSWR from "swr";
-import { useState } from "react";
 import BarLoader from "react-spinners/BarLoader";
-import Button from "../components/Elements/Button";
 import Card from "../components/Fragments/Card";
 import ProductLayouts from "../components/Layouts/ProductLayouts";
 import fetcher from "../lib/fetcher";
-
-const email = localStorage.getItem("email");
-const handleLogout = () => {
-  localStorage.removeItem("email");
-  localStorage.removeItem("password");
-  location.href = "/login";
-};
+import { useDispatch } from "react-redux";
+import { addToCart } from "../lib/slices/cartSlicer";
+import Navbar from "../components/Layouts/Navbar";
 
 const BASE_URL = import.meta.env.VITE_BASE_API_URL;
 
 const ProductsPage = () => {
-  const [product, setProduct] = useState({});
+  const dispatch = useDispatch();
+
   const {
     data: products,
     error,
@@ -25,7 +20,7 @@ const ProductsPage = () => {
 
   const handleAddToCart = ({ id, qty }) => {
     const product = products.find((item) => item.id === id);
-    setProduct({ ...product, qty });
+    dispatch(addToCart({ ...product, qty }));
   };
 
   const truncate = (str, max) => {
@@ -34,13 +29,8 @@ const ProductsPage = () => {
 
   return (
     <>
-      <div className="flex h-20 bg-blue-600 justify-between items-center text-white px-6">
-        <span>{email}</span>
-        <Button className="bg-red-600" onClick={handleLogout}>
-          Logout
-        </Button>
-      </div>
-      <ProductLayouts productSelected={product}>
+      <Navbar />
+      <ProductLayouts>
         {isLoading && (
           <BarLoader
             color="#2563eb"
