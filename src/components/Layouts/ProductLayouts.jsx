@@ -1,9 +1,7 @@
 /* eslint-disable react/prop-types */
 import Cart from "../Fragments/Cart";
 
-const ProductLayouts = (props) => {
-  const { children, productSelected } = props;
-
+const ProductLayouts = ({ children }) => {
   return (
     <div className="container p-6 mx-auto">
       <header className="mb-8">
@@ -15,7 +13,7 @@ const ProductLayouts = (props) => {
       <main className="flex gap-5">
         <section className="flex flex-wrap gap-3 w-2/3">{children}</section>
         <section className="w-1/3">
-          <Cart productSelected={productSelected} />
+          <Cart />
         </section>
       </main>
     </div>
