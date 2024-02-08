@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import { useState } from "react";
+import BarLoader from "react-spinners/BarLoader";
 import Button from "../components/Elements/Button";
 import Card from "../components/Fragments/Card";
 import ProductLayouts from "../components/Layouts/ProductLayouts";
@@ -41,7 +42,15 @@ const ProductsPage = () => {
         </Button>
       </div>
       <ProductLayouts productSelected={product}>
-        {products.map(({ id, title, image, description, price }) => {
+        {isLoading && (
+          <BarLoader
+            color="#2563eb"
+            loading={isLoading}
+            size={15}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        )}
           return (
             <Card key={id}>
               <Card.Header img={image}>{title}</Card.Header>
