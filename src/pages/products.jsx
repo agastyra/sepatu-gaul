@@ -4,7 +4,6 @@ import BarLoader from "react-spinners/BarLoader";
 import Button from "../components/Elements/Button";
 import Card from "../components/Fragments/Card";
 import ProductLayouts from "../components/Layouts/ProductLayouts";
-import products from "../data/products.json";
 import fetcher from "../lib/fetcher";
 
 const email = localStorage.getItem("email");
@@ -29,9 +28,10 @@ const ProductsPage = () => {
     setProduct({ ...product, qty });
   };
 
-  if (!email) {
-    location.href = "/login";
-  }
+  const truncate = (str, max) => {
+    return str.length > max ? str.substring(0, max) + "..." : str;
+  };
+
   return (
     <>
       <div className="flex h-20 bg-blue-600 justify-between items-center text-white px-6">
@@ -54,12 +54,12 @@ const ProductsPage = () => {
         {products?.map(({ id, title, image, description, price }) => {
           return (
             <Card key={id}>
-              <Card.Header img={image}>{title}</Card.Header>
-              <Card.Body>{description}</Card.Body>
+              <Card.Header img={image}>{truncate(title, 40)}</Card.Header>
+              <Card.Body>{truncate(description, 150)}</Card.Body>
               <Card.Footer productId={id} handleAddToCart={handleAddToCart}>
-                {price.toLocaleString("id-ID", {
+                {price.toLocaleString("en-US", {
                   style: "currency",
-                  currency: "IDR",
+                  currency: "USD",
                   minimumFractionDigits: 0,
                 })}
               </Card.Footer>

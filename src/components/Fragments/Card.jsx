@@ -4,7 +4,7 @@ import Button from "../Elements/Button";
 
 const Card = ({ children }) => {
   return (
-    <div className="border shadow rounded-lg w-full max-w-sm p-4 flex flex-col justify-between">
+    <div className="border shadow rounded-lg w-full max-w-sm p-4 flex flex-col justify-between gap-3">
       {children}
     </div>
   );
@@ -16,7 +16,7 @@ const Header = ({ children, img }) => {
       <img
         src={img}
         alt="shoes"
-        className="object-cover w-full h-full rounded-lg mb-3"
+        className="object-cover w-full h-[250px] object-top rounded-lg mb-3"
       />
       <h3 className="font-semibold text-2xl tracking-tight px-3">{children}</h3>
     </header>

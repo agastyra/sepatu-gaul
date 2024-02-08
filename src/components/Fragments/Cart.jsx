@@ -26,17 +26,17 @@ const Cart = ({ productSelected }) => {
               <tr key={id}>
                 <td>{title}</td>
                 <td>
-                  {price.toLocaleString("id-ID", {
+                  {price.toLocaleString("en-US", {
                     style: "currency",
-                    currency: "IDR",
+                    currency: "USD",
                     minimumFractionDigits: 0,
                   })}
                 </td>
                 <td>{qty}</td>
                 <td>
-                  {(price * qty).toLocaleString("id-ID", {
+                  {(price * qty).toLocaleString("en-US", {
                     style: "currency",
-                    currency: "IDR",
+                    currency: "USD",
                     minimumFractionDigits: 0,
                   })}
                 </td>
@@ -49,9 +49,9 @@ const Cart = ({ productSelected }) => {
             Total
           </th>
           <th>
-            {total.toLocaleString("id-ID", {
+            {total.toLocaleString("en-US", {
               style: "currency",
-              currency: "IDR",
+              currency: "USD",
               minimumFractionDigits: 0,
             })}
           </th>
