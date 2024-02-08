@@ -1,8 +1,10 @@
-import { useState, useRef } from "react";
+import useSWR from "swr";
+import { useState } from "react";
 import Button from "../components/Elements/Button";
 import Card from "../components/Fragments/Card";
 import ProductLayouts from "../components/Layouts/ProductLayouts";
 import products from "../data/products.json";
+import fetcher from "../lib/fetcher";
 
 const email = localStorage.getItem("email");
 const handleLogout = () => {
@@ -11,8 +13,16 @@ const handleLogout = () => {
   location.href = "/login";
 };
 
+const BASE_URL = import.meta.env.VITE_BASE_API_URL;
+
 const ProductsPage = () => {
   const [product, setProduct] = useState({});
+  const { data, error, isLoading } = useSWR(
+    `https://fakestoreapi.com/products`,
+    fetcher
+  );
+
+  console.log(data);
 
   const handleAddToCart = ({ id, qty }) => {
     const product = products.find((item) => item.id === id);
