@@ -18,12 +18,11 @@ const BASE_URL = import.meta.env.VITE_BASE_API_URL;
 
 const ProductsPage = () => {
   const [product, setProduct] = useState({});
-  const { data, error, isLoading } = useSWR(
-    `https://fakestoreapi.com/products`,
-    fetcher
-  );
-
-  console.log(data);
+  const {
+    data: products,
+    error,
+    isLoading,
+  } = useSWR(`https://fakestoreapi.com/products`, fetcher);
 
   const handleAddToCart = ({ id, qty }) => {
     const product = products.find((item) => item.id === id);
@@ -51,6 +50,8 @@ const ProductsPage = () => {
             data-testid="loader"
           />
         )}
+        {error && <p>{error}</p>}
+        {products?.map(({ id, title, image, description, price }) => {
           return (
             <Card key={id}>
               <Card.Header img={image}>{title}</Card.Header>
