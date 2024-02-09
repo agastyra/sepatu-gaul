@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import Table from "../Elements/Table";
 import { useSelector } from "react-redux";
 import { DarkMode } from "../../context/DarkMode";
+import { useTotalPrice, useTotalPriceDispatch } from "../../context/TotalPrice";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-  const [total, setTotal] = useState(0);
+  const dispatch = useTotalPriceDispatch();
+  const total = useTotalPrice();
 
   const { darkMode } = useContext(DarkMode);
 
@@ -15,7 +17,10 @@ const Cart = () => {
       (total, product) => total + product.qty * product.price,
       0
     );
-    setTotal(sum);
+    dispatch({
+      type: "UPDATE",
+      payload: sum,
+    });
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
@@ -69,7 +74,7 @@ const Cart = () => {
             Total
           </th>
           <th>
-            {total.toLocaleString("en-US", {
+            {total?.toLocaleString("en-US", {
               style: "currency",
               currency: "USD",
               minimumFractionDigits: 0,

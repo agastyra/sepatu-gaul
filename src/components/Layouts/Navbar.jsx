@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { useSelector } from "react-redux";
 import Button from "../Elements/Button";
 import { DarkMode } from "../../context/DarkMode";
+import { useTotalPrice } from "../../context/TotalPrice";
 
 const email = localStorage.getItem("email");
 const handleLogout = () => {
@@ -14,6 +15,7 @@ const Navbar = () => {
   const cart = useSelector((state) => state.cart);
   const [item, setItem] = useState(0);
   const { darkMode, setDarkMode } = useContext(DarkMode);
+  const total = useTotalPrice();
 
   useEffect(() => {
     const sum = cart.reduce((total, product) => total + product.qty, 0);
@@ -48,6 +50,13 @@ const Navbar = () => {
             </span>
           )}
         </span>
+        (
+        {total?.toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+          minimumFractionDigits: 0,
+        })}
+        )
         <Button className="bg-red-700" onClick={handleLogout}>
           Logout
         </Button>
