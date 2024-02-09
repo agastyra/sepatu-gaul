@@ -6,8 +6,13 @@ import fetcher from "../lib/fetcher";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../lib/slices/cartSlicer";
 import Navbar from "../components/Layouts/Navbar";
+import { DarkMode } from "../context/DarkMode";
+import { useContext } from "react";
 
 const BASE_URL = import.meta.env.VITE_BASE_API_URL;
+const truncate = (str, max) => {
+  return str.length > max ? str.substring(0, max) + "..." : str;
+};
 
 const ProductsPage = () => {
   const dispatch = useDispatch();
@@ -23,12 +28,10 @@ const ProductsPage = () => {
     dispatch(addToCart({ ...product, qty }));
   };
 
-  const truncate = (str, max) => {
-    return str.length > max ? str.substring(0, max) + "..." : str;
-  };
+  const { darkMode } = useContext(DarkMode);
 
   return (
-    <>
+    <div className={`transition-all ${darkMode ? "bg-slate-900" : ""}`}>
       <Navbar />
       <ProductLayouts>
         {isLoading && (
@@ -57,7 +60,7 @@ const ProductsPage = () => {
           );
         })}
       </ProductLayouts>
-    </>
+    </div>
   );
 };
 
