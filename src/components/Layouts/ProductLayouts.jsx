@@ -1,12 +1,26 @@
 /* eslint-disable react/prop-types */
 import Cart from "../Fragments/Cart";
+import { DarkMode } from "../../context/DarkMode";
+import { useContext } from "react";
 
 const ProductLayouts = ({ children }) => {
+  const { darkMode } = useContext(DarkMode);
+
   return (
     <div className="container p-6 mx-auto">
       <header className="mb-8">
-        <h1 className="text-3xl font-bold text-blue-600 mb-3">Products Page</h1>
-        <p className="tracking-wide font-medium text-slate-400">
+        <h1
+          className={`transition-all text-3xl font-bold ${
+            darkMode ? "text-blue-400" : "text-blue-600"
+          } mb-3`}
+        >
+          Products Page
+        </h1>
+        <p
+          className={`transition-all tracking-wide font-medium ${
+            darkMode ? "text-slate-200" : "text-slate-400"
+          }`}
+        >
           Find your needs here...
         </p>
       </header>

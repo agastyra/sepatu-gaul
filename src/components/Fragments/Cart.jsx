@@ -1,11 +1,14 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Table from "../Elements/Table";
 import { useSelector } from "react-redux";
+import { DarkMode } from "../../context/DarkMode";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const [total, setTotal] = useState(0);
+
+  const { darkMode } = useContext(DarkMode);
 
   useEffect(() => {
     const sum = cart.reduce(
@@ -18,7 +21,13 @@ const Cart = () => {
 
   return (
     <>
-      <h2 className="text-2xl font-medium tracking-wide mb-3">Cart:</h2>
+      <h2
+        className={`transition-all text-2xl font-medium tracking-wide mb-3 ${
+          darkMode ? "text-white" : "text-black"
+        }`}
+      >
+        Cart:
+      </h2>
       <Table>
         <Table.Head>
           <th>Name</th>

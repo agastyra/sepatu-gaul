@@ -1,10 +1,18 @@
 /* eslint-disable react/prop-types */
 import { useState, useRef, useEffect } from "react";
 import Button from "../Elements/Button";
+import { DarkMode } from "../../context/DarkMode";
+import { useContext } from "react";
 
 const Card = ({ children }) => {
+  const { darkMode } = useContext(DarkMode);
+
   return (
-    <div className="border shadow rounded-lg w-full max-w-sm p-4 flex flex-col justify-between gap-3">
+    <div
+      className={`transition-all border shadow rounded-lg w-full max-w-sm p-4 flex flex-col justify-between gap-3 ${
+        darkMode ? "text-white border-slate-800" : "text-black"
+      }`}
+    >
       {children}
     </div>
   );

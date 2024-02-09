@@ -1,7 +1,16 @@
+import { DarkMode } from "../../../context/DarkMode";
+import { useContext } from "react";
+
 const Table = ({ children }) => {
+  const { darkMode } = useContext(DarkMode);
+
   return (
     <>
-      <table className="table-auto border border-separate border-spacing-3">
+      <table
+        className={`transition-all table-auto border border-separate border-spacing-3 ${
+          darkMode ? "text-white border-slate-800" : "text-black"
+        }`}
+      >
         {children}
       </table>
     </>
