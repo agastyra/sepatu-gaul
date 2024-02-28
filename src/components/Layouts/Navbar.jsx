@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Button from "../Elements/Button";
 import { DarkMode } from "../../context/DarkMode";
 import { useTotalPrice } from "../../context/TotalPrice";
+import formatCurrency from "../../lib/formatCurrency";
 
 const email = localStorage.getItem("email");
 const handleLogout = () => {
@@ -50,13 +51,7 @@ const Navbar = () => {
             </span>
           )}
         </span>
-        (
-        {total?.toLocaleString("en-US", {
-          style: "currency",
-          currency: "USD",
-          minimumFractionDigits: 0,
-        })}
-        )
+        ({formatCurrency(total, "en-US", "USD", 0)})
         <Button className="bg-red-700" onClick={handleLogout}>
           Logout
         </Button>

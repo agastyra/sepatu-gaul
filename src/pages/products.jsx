@@ -8,8 +8,8 @@ import { addToCart } from "../lib/slices/cartSlicer";
 import Navbar from "../components/Layouts/Navbar";
 import { DarkMode } from "../context/DarkMode";
 import { useContext } from "react";
+import formatCurrency from "../lib/formatCurrency";
 
-const BASE_URL = import.meta.env.VITE_BASE_API_URL;
 const truncate = (str, max) => {
   return str.length > max ? str.substring(0, max) + "..." : str;
 };
@@ -50,11 +50,7 @@ const ProductsPage = () => {
               <Card.Header img={image}>{truncate(title, 40)}</Card.Header>
               <Card.Body>{truncate(description, 150)}</Card.Body>
               <Card.Footer productId={id} handleAddToCart={handleAddToCart}>
-                {price.toLocaleString("en-US", {
-                  style: "currency",
-                  currency: "USD",
-                  minimumFractionDigits: 0,
-                })}
+                {formatCurrency(price, "en-US", "USD", 0)}
               </Card.Footer>
             </Card>
           );

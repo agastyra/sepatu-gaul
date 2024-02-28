@@ -4,6 +4,7 @@ import Table from "../Elements/Table";
 import { useSelector } from "react-redux";
 import { DarkMode } from "../../context/DarkMode";
 import { useTotalPrice, useTotalPriceDispatch } from "../../context/TotalPrice";
+import formatCurrency from "../../lib/formatCurrency";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
@@ -50,21 +51,9 @@ const Cart = () => {
             return (
               <tr key={id}>
                 <td>{title}</td>
-                <td>
-                  {price.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                    minimumFractionDigits: 0,
-                  })}
-                </td>
+                <td>{formatCurrency(price, "en-US", "USD", 0)}</td>
                 <td>{qty}</td>
-                <td>
-                  {(price * qty).toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                    minimumFractionDigits: 0,
-                  })}
-                </td>
+                <td>{formatCurrency(price * qty, "en-US", "USD", 0)}</td>
               </tr>
             );
           })}
@@ -73,13 +62,7 @@ const Cart = () => {
           <th colSpan={3} className="text-right">
             Total
           </th>
-          <th>
-            {total?.toLocaleString("en-US", {
-              style: "currency",
-              currency: "USD",
-              minimumFractionDigits: 0,
-            })}
-          </th>
+          <th>{formatCurrency(total, "en-US", "USD", 0)}</th>
         </Table.Foot>
       </Table>
     </>
